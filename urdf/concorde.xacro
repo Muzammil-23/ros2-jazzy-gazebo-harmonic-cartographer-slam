@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<robot name="concorde" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- ============ PROPERTIES ============ -->
+  <xacro:property name="mesh_dir" value="file:///home/muzammil/ros2_ws/install/concorde/share/concorde/meshes/"/>
+  <xacro:property name="wheel_separation_front" value="0.0410"/>   <!-- |FL_y| + |FR_y| -->
+  <xacro:property name="wheel_separation_rear" value="0.0510"/>    <!-- |BL_y| + |BR_y| -->
+  <xacro:property name="wheel_separation" value="0.041"/>          <!-- average -->
+  <xacro:property name="wheel_radius" value="0.02"/>               <!-- measure from mesh, adjust if needed -->
+
+  <!-- ============ WHEEL MACRO ============ -->
+  <xacro:macro name="wheel" params="prefix joint_x joint_y joint_z mass inertia_ixx inertia_ixy inertia_ixz inertia_iyy inertia_iyz inertia_izz inert_origin_x inert_origin_y inert_origin_z">
+    <link name="link_${prefix}">
+      <inertial>
+        <origin xyz="${inert_origin_x} ${inert_origin_y} ${inert_origin_z}" rpy="0 0 0"/>
+        <mass value="${mass}"/>
+        <inertia ixx="${inertia_ixx}" ixy="${inertia_ixy}" ixz="${inertia_ixz}"
+                 iyy="${inertia_iyy}" iyz="${inertia_iyz}"
+                 izz="${inertia_izz}"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="${mesh_dir}link_${prefix}.STL"/>
+        </geometry>
+        <material name=""><color rgba="1 1 1 1"/></material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="${mesh_dir}link_${prefix}.STL"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="joint_${prefix}" type="continuous">
+      <origin xyz="${joint_x} ${joint_y} ${joint_z}" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="link_${prefix}"/>
+      <axis xyz="0 1 0"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- ============ BASE LINK ============ -->
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0.0050006 -7.9635E-07 -0.0029105" rpy="0 0 0"/>
+      <mass value="0.030526"/>
+      <inertia ixx="3.1037E-06" ixy="-6.4881E-10" ixz="1.5093E-06"
+               iyy="2.0657E-05" iyz="3.7094E-11"
+               izz="2.2043E-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="${mesh_dir}base_link.STL"/>
+      </geometry>
+      <material name=""><color rgba="0.50196 0.50196 0.50196 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="${mesh_dir}base_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- ============ WHEELS ============ -->
+  <!-- Front Right -->
+  <xacro:wheel prefix="FR"
+               joint_x="0.048826" joint_y="-0.0205" joint_z="-0.0058097"
+               mass="0.0020848"
+               inertia_ixx="5.2358E-08" inertia_ixy="1.1117E-24" inertia_ixz="-4.392E-25"
+               inertia_iyy="5.9195E-08" inertia_iyz="-1.0562E-24"
+               inertia_izz="5.2358E-08"
+               inert_origin_x="8.6736E-19" inert_origin_y="0.0059525" inert_origin_z="0"/>
+
+  <!-- Front Left -->
+  <xacro:wheel prefix="FL"
+               joint_x="0.048826" joint_y="0.0205" joint_z="-0.0058097"
+               mass="0.0020848"
+               inertia_ixx="5.2358E-08" inertia_ixy="2.6949E-25" inertia_ixz="3.4549E-25"
+               inertia_iyy="5.9195E-08" inertia_iyz="-7.0085E-25"
+               inertia_izz="5.2358E-08"
+               inert_origin_x="-1.7347E-18" inert_origin_y="-0.0059525" inert_origin_z="0"/>
+
+  <!-- Back Right -->
+  <xacro:wheel prefix="BR"
+               joint_x="-0.018674" joint_y="-0.0255" joint_z="-0.006"
+               mass="0.0020848"
+               inertia_ixx="5.2358E-08" inertia_ixy="8.0645E-25" inertia_ixz="4.5554E-25"
+               inertia_iyy="5.9195E-08" inertia_iyz="-1.2474E-24"
+               inertia_izz="5.2358E-08"
+               inert_origin_x="0" inert_origin_y="0.0059525" inert_origin_z="-1.3878E-17"/>
+
+  <!-- Back Left -->
+  <xacro:wheel prefix="BL"
+               joint_x="-0.018674" joint_y="0.0255" joint_z="-0.006"
+               mass="0.0020848"
+               inertia_ixx="5.2358E-08" inertia_ixy="-7.9204E-25" inertia_ixz="3.9571E-25"
+               inertia_iyy="5.9195E-08" inertia_iyz="1.8783E-25"
+               inertia_izz="5.2358E-08"
+               inert_origin_x="0" inert_origin_y="-0.0059525" inert_origin_z="1.3878E-17"/>
+
+<!-- ============ VELOCITY CONTROL PLUGIN ============ -->
+  <gazebo>
+    <plugin name="gz::sim::v8::systems::VelocityControl"
+            filename="libgz-sim8-velocity-control-system.so">
+      <topic>/model/concorde/cmd_vel</topic>
+      <left_joint>joint_FL joint_BL</left_joint>
+      <right_joint>joint_FR joint_BR</right_joint>
+      <wheel_separation>0.046</wheel_separation>
+      <wheel_radius>0.02</wheel_radius>
+    </plugin>
+  </gazebo>
+
+</robot>
