@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.5.1-0-g916b5db  Build Version: 1.5.7152.31018
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="concorde">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.0050006 -7.9635E-07 -0.0029105"
+        rpy="0 0 0" />
+      <mass
+        value="0.030526" />
+      <inertia
+        ixx="3.1037E-06"
+        ixy="-6.4881E-10"
+        ixz="1.5093E-06"
+        iyy="2.0657E-05"
+        iyz="3.7094E-11"
+        izz="2.2043E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://concorde/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.50196 0.50196 0.50196 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://concorde/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="link_FR">
+    <inertial>
+      <origin
+        xyz="8.6736E-19 0.0059525 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.0020848" />
+      <inertia
+        ixx="5.2358E-08"
+        ixy="1.1117E-24"
+        ixz="-4.392E-25"
+        iyy="5.9195E-08"
+        iyz="-1.0562E-24"
+        izz="5.2358E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://concorde/meshes/link_FR.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://concorde/meshes/link_FR.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_FR"
+    type="continuous">
+    <origin
+      xyz="0.048826 -0.0205 -0.0058097"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="link_FR" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="link_FL">
+    <inertial>
+      <origin
+        xyz="-1.7347E-18 -0.0059525 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.0020848" />
+      <inertia
+        ixx="5.2358E-08"
+        ixy="2.6949E-25"
+        ixz="3.4549E-25"
+        iyy="5.9195E-08"
+        iyz="-7.0085E-25"
+        izz="5.2358E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://concorde/meshes/link_FL.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://concorde/meshes/link_FL.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_FL"
+    type="continuous">
+    <origin
+      xyz="0.048826 0.0205 -0.0058097"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="link_FL" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="link_BR">
+    <inertial>
+      <origin
+        xyz="0 0.0059525 -1.3878E-17"
+        rpy="0 0 0" />
+      <mass
+        value="0.0020848" />
+      <inertia
+        ixx="5.2358E-08"
+        ixy="8.0645E-25"
+        ixz="4.5554E-25"
+        iyy="5.9195E-08"
+        iyz="-1.2474E-24"
+        izz="5.2358E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://concorde/meshes/link_BR.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://concorde/meshes/link_BR.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_BR"
+    type="continuous">
+    <origin
+      xyz="-0.018674 -0.0255 -0.006"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="link_BR" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="link_BL">
+    <inertial>
+      <origin
+        xyz="0 -0.0059525 1.3878E-17"
+        rpy="0 0 0" />
+      <mass
+        value="0.0020848" />
+      <inertia
+        ixx="5.2358E-08"
+        ixy="-7.9204E-25"
+        ixz="3.9571E-25"
+        iyy="5.9195E-08"
+        iyz="1.8783E-25"
+        izz="5.2358E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://concorde/meshes/link_BL.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://concorde/meshes/link_BL.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_BL"
+    type="continuous">
+    <origin
+      xyz="-0.018674 0.0255 -0.006"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="link_BL" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+</robot>
