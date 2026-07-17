@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <model name="concorde_lidar">
+    <static>true</static>
+    <link name="laser_link">
+      <visual name="lidar_visual">
+        <geometry>
+          <cylinder>
+            <radius>0.015</radius>
+            <length>0.03</length>
+          </cylinder>
+        </geometry>
+        <material><ambient>1 0 0 1</ambient></material>
+      </visual>
+      <sensor name="hls_lfcd_lds" type="gpu_lidar">
+        <always_on>true</always_on>
+        <visualize>true</visualize>
+        <update_rate>5</update_rate>
+        <topic>scan</topic>
+        <gz_frame_id>laser_link</gz_frame_id>
+        <lidar>
+          <scan>
+            <horizontal>
+              <samples>360</samples>
+              <resolution>1.0</resolution>
+              <min_angle>0.0</min_angle>
+              <max_angle>6.28</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.12</min>
+            <max>3.5</max>
+            <resolution>0.015</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </lidar>
+      </sensor>
+    </link>
+  </model>
+</sdf>
