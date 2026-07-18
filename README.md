@@ -1,6 +1,6 @@
 # ros2-jazzy-gazebo-harmonic-cartographer-slam
 
-ROS 2 Jazzy + Gazebo Harmonic differential drive robot with LiDAR-based SLAM mapping using Cartographer. Includes working world SDF, sensor bridge config, and Cartographer Lua — with documented fixes for Gazebo Harmonic sensor, plugin, and TF gotchas.
+ROS 2 Jazzy + Gazebo Harmonic differential drive robot with LiDAR-based SLAM mapping using Cartographer. Includes working world SDF, sensor bridge config, and Cartographer Lua, with documented fixes for Gazebo Harmonic sensor, plugin, and TF gotchas.
 
 ## Demo
 
@@ -37,7 +37,7 @@ sudo apt install -y \
 ```
 
 ### Environment Variables
-Add these to your `~/.bashrc` — required for Gazebo transport to work correctly on single-machine setups:
+Add these to your `~/.bashrc`  required for Gazebo transport to work correctly on single-machine setups:
 ```bash
 export GZ_IP=127.0.0.1
 export GZ_PARTITION=concorde
@@ -82,10 +82,7 @@ concorde/
 │   └── concorde_map.yaml               # Map metadata (resolution, origin, thresholds)
 │
 └── docs/
-    ├── frames.pdf                      # TF tree snapshot from view_frames
-    ├── rviz_map.png                    # Screenshot of map in RViz
-    ├── gazebo_screenshot.png           # Robot in Gazebo
-    └── summary.md                      # Full lessons learned — read this first
+    └── summary.md                      # Full lessons learned. Read this first
 ```
 
 ---
@@ -141,16 +138,16 @@ ros2 run nav2_map_server map_saver_cli -f ~/ros2_ws/src/concorde/maps/concorde_m
 
 ## Known Limitations
 
-- LiDAR is a separate static model — it does not follow the robot during teleoperation. The map is built from a fixed sensor position.
+- LiDAR is a separate static model, it does not follow the robot during teleoperation. The map is built from a fixed sensor position.
 - Odometry is a static transform placeholder (`odom → base_link`). Real odometry from a DiffDrive plugin is required for Phase 3 Nav2 navigation.
-- Gazebo Harmonic requires a custom world SDF — `empty.sdf` does not load the Sensors system plugin and all sensors will silently produce no data.
+- Gazebo Harmonic requires a custom world SDF, `empty.sdf` does not load the Sensors system plugin and all sensors will silently produce no data.
 - `gpu_lidar` requires the `gz-sim-sensors-system` plugin in the world SDF and a rendering engine (ogre2). Without it the sensor registers but publishes nothing.
 
 ---
 
 ## Lessons Learned
 
-See [`docs/summary.md`](docs/summary.md) for the full breakdown of every issue encountered and how it was resolved. If you are using ROS 2 Jazzy with Gazebo Harmonic, read that file before starting — it will save you days.
+See [`docs/summary.md`](docs/summary.md) for the full breakdown of every issue encountered and how it was resolved. If you are using ROS 2 Jazzy with Gazebo Harmonic, read that file before starting, it will save you days.
 
 ---
 
