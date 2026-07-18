@@ -5,7 +5,7 @@ ROS 2 Jazzy + Gazebo Harmonic differential drive robot with LiDAR-based SLAM map
 ## Demo
 
 | Gazebo Simulation | SLAM Map in RViz |
-|---|---|
+|------------|-----------|
 | ![Gazebo](images/gazebo.png) | ![Map](images/rviz.png) |
 
 ---
